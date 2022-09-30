@@ -1,0 +1,212 @@
+@import './common.scss';
+
+.nav {
+	display: flex;
+	min-height: $nav-height;
+	align-content: center;
+	position: relative;
+	color: var(--slate);
+	border-bottom: var(--border) 1px solid;
+	padding: 0px 5vw;
+	z-index: 10;
+	text-align: center;
+	background: var(--background);
+
+	> .collapsable {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+	}
+
+	> .expand {
+		position: relative;
+		display: none;
+		padding: 15px;
+		cursor: pointer;
+
+		> div {
+			width: 30px;
+			height: 20px;
+			position: relative;
+
+			span {
+				display: block;
+				position: absolute;
+				height: 0px;
+				width: 100%;
+				border-top: 1px solid var(--slate);
+				left: 0;
+				transform: rotate(0deg);
+				transition: width 0.2s ease-in-out, left 0.2s ease-in-out,
+					transform 0.2s ease-in-out;
+
+				&:nth-child(1) {
+					top: 0px;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					top: 10px;
+				}
+
+				&:nth-child(4) {
+					top: 20px;
+				}
+			}
+		}
+	}
+
+	@include screenMobile {
+		> .expand {
+			display: flex;
+		}
+
+		> .collapsable {
+			display: none;
+			flex-direction: column;
+			width: 100%;
+			top: 100%;
+			position: absolute;
+			left: 0px;
+			right: 0px;
+			text-align: left;
+			background: var(--background);
+			border-bottom: 1px solid var(--border);
+		}
+
+		> .separator {
+			display: none;
+		}
+
+		> .logo {
+			position: absolute;
+			left: 0px;
+			right: 0px;
+			margin: auto;
+			width: 50px;
+		}
+	}
+
+	> button {
+		box-sizing: content-box;
+		border: none;
+		background: none;
+		width: 25px;
+		height: 25px;
+		margin: auto 5px;
+		border-radius: 2px;
+		padding: 5px;
+		position: relative;
+		flex: none;
+		cursor: pointer;
+		color: inherit;
+
+		&:hover {
+			background: var(--accent);
+		}
+	}
+
+	.entry {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: $nav-height;
+		padding: 0px 15px;
+		color: inherit;
+
+		> svg {
+			height: 25px;
+			width: 25px;
+			color: inherit;
+		}
+
+		span {
+			position: relative;
+
+			&::after {
+				display: none;
+				content: '';
+				position: absolute;
+				border-bottom: 2px solid var(--slate);
+				left: 0;
+				right: 0;
+				bottom: -0.125rem;
+			}
+		}
+
+		&:hover {
+			text-decoration: none;
+
+			span::after {
+				display: block;
+			}
+		}
+	}
+
+	.separator {
+		background: var(--border);
+		height: 30px;
+		width: 2px;
+		margin: auto 8px;
+	}
+
+	> .shiftRight {
+		margin-left: auto;
+	}
+}
+
+@media only screen and (max-width: 500px) {
+	nav[data-expanded='1'] {
+		> *:not(.expand) {
+			display: none;
+		}
+
+		.collapsable {
+			display: flex;
+		}
+
+		> .expand span {
+			&:nth-child(1) {
+				top: 10;
+				width: 0%;
+				left: 50%;
+			}
+
+			&:nth-child(2) {
+				transform: rotate(45deg);
+			}
+
+			&:nth-child(3) {
+				transform: rotate(-45deg);
+			}
+
+			&:nth-child(4) {
+				top: 10;
+				width: 0%;
+				left: 50%;
+			}
+		}
+	}
+}
+
+.footer {
+	height: 24px;
+	padding: 30px 5% 32px 5%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: auto;
+	background: var(--background);
+	color: var(--subtle);
+	font-size: 11px;
+	line-height: 16px;
+	flex: none;
+
+	> * {
+		margin-left: 15px;
+	}
+
+	> a {
+		color: inherit;
+		text-decoration: none;
+	}
+}
